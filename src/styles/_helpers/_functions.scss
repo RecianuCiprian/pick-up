@@ -1,0 +1,3 @@
+@function parseVal($n) {
+  @return $n / ($n * 0 + 1);
+}

@@ -1,0 +1,120 @@
+@import "./styles/_helpers/mixins";
+@import "./styles/global/variables";
+
+.rc-app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  &__pick_up {
+    @include mds-breakpoint('phone') {
+      width: 100%;
+    }
+
+    @include mds-breakpoint('to-tablet') {
+      width: 100%;
+    }
+
+    @include mds-breakpoint('from-laptop') {
+      width: 50%;
+    }
+
+    @include mds-breakpoint('from-tablet') {
+      width: 50%;
+    }
+
+    height: 50%;
+    background-color: $color-search-location;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+    &__title{
+      margin-top: 50px;
+      @include mds-font-size(30px);
+      font-weight: bold;
+    }
+
+    &--position {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        padding-bottom: 15px;
+      }
+
+      input {
+        height: 10px;
+        margin: 0;
+        border-radius: 0;
+        background: $color-input;
+        border: 1px solid $color-input_border;
+        font-size: 0.813em;
+        padding: 10px;
+      }
+    }
+  }
+
+  &__dropdown {
+    margin-top: 60px;
+    position: relative;
+    display: inline-block;
+    @include mds-breakpoint('phone') {
+      width: 80%;
+    }
+
+    @include mds-breakpoint('to-tablet') {
+      width: 50%;
+    }
+    @include mds-breakpoint('from-tablet') {
+      width: 60%;
+    }
+
+
+    @include mds-breakpoint('from-laptop') {
+      width: 50%;
+    }
+  }
+
+  &__dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: $color-white;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+
+  .show {
+    display: block;
+  }
+
+  &__results{
+    border-bottom: 0.5px solid $color-result;
+    padding: 6px 0 6px 20px;
+    cursor: pointer;
+
+    &__title{
+      @include mds-font-size(20px);
+      font-weight: bold;
+    }
+
+    &__info{
+      @include mds-font-size(16px);
+    }
+    &:hover{
+      background-color: $color-result_hover;
+    }
+  }
+  &__no-results{
+    padding: 6px 0 6px 20px;
+  }
+
+  &__error{
+    padding-top: 20px;
+    color: $color-error;
+    font-weight: bold;
+  }
+}
