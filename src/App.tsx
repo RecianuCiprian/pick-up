@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './App.scss';
-import debounce from 'debounce';
+// @ts-ignore
+import { debounce } from 'throttle-debounce';
 import cx from 'classnames';
 import { IAppState } from './AppI';
 
@@ -16,7 +17,7 @@ class App extends React.Component<any, IAppState> {
             },
             err: '',
         };
-        this.emitChangeDebounced = debounce(this.handleChangeDebounce, 500);
+        this.emitChangeDebounced = debounce(500, this.handleChangeDebounce);
     }
 
     public render() {
