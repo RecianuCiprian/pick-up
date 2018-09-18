@@ -2,14 +2,18 @@ import * as React from 'react';
 import './App.scss';
 import debounce from 'debounce';
 import cx from 'classnames';
+import { IAppState } from './AppI';
 
-class App extends React.Component<any, any> {
+class App extends React.Component<any, IAppState> {
     private readonly emitChangeDebounced: any;
 
     constructor(props: any) {
         super(props);
         this.state = {
-            results: {},
+            results: {
+                docs: [],
+                numFound: 0,
+            },
             err: '',
         };
         this.emitChangeDebounced = debounce(this.handleChangeDebounce, 500);
@@ -43,7 +47,7 @@ class App extends React.Component<any, any> {
                                         </div>
                                     )
                                 }
-                                const info = doc.city ? `${doc.city}, ${doc.country}`: `${doc.country}`;
+                                const info = doc.city ? `${doc.city}, ${doc.country}` : `${doc.country}`;
                                 return (
                                     <div className="rc-app__results" key={doc.bookingId}>
                                         <div className="rc-app__results__title">{doc.name}</div>
@@ -71,10 +75,13 @@ class App extends React.Component<any, any> {
 
     private handleChangeDebounce(value: string) {
         if (value.length > 1) {
-            this.fetchData(value, 5);
+            this.fetchData(value, 6);
         } else {
             this.setState({
-                results: {},
+                results: {
+                    docs: [],
+                    numFound: 0,
+                },
             })
         }
     }
@@ -84,7 +91,6 @@ class App extends React.Component<any, any> {
             .then((data) => {
                 data.json().then((responseData) => {
                     const {results = {}} = responseData;
-                    console.log(results);
                     this.setState({
                         results,
                     })
